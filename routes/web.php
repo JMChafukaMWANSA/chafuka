@@ -14,5 +14,23 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::resource('products', ProductController::class);
 
+Auth::routes();
+
+route::middleware(['auth'])->group(function () {
+
+
+//Route::get ('products', [ProductController::class]);
+Route::get('/product/index', [ProductController::class, 'index'])->name('products.index');
+Route::get  ('/product/show', [ProductController::class, 'show'])->name('products.show');
+Route::get ('/product/store', [ProductController::class, 'store'])->name('products.store');
+Route::get('/product/create', [ProductController::class, 'create'])->name('products.create');
+Route::get('/delete/{id}', [ProductController::class, 'delete']);
+Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
+Route::put ('/update', [ProductController::class, 'update'])->name('products.update');
+
+
+//Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
